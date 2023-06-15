@@ -1,5 +1,6 @@
 package com.aixel.recipeme.controller;
 
+import com.aixel.recipeme.core.CrudController;
 import com.aixel.recipeme.document.UserDocument;
 import com.aixel.recipeme.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/user")
 @RequiredArgsConstructor
-public class UserController {
+public class UserController extends CrudController<UserDocument, String> {
 
     private final UserService userService;
 
