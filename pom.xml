@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.aixel</groupId>
-	<artifactId>recipe-me</artifactId>
+	<artifactId>cine-booking</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>recipe-me</name>
+	<name>cine-booking</name>
 	<description>Large Scale Project</description>
 	<properties>
 		<java.version>17</java.version>
