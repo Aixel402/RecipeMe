@@ -3,10 +3,12 @@ package com.aixel.recipeme.document;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import javax.validation.constraints.NotNull;
+import java.util.Calendar;
 
 @Data
 @Document
@@ -24,4 +26,8 @@ public class UserDocument {
 
     @NotNull(message = "The user must have an email")
     private String email;
+
+    private Calendar dateOfBith;
+
+
 }

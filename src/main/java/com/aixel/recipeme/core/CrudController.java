@@ -1,5 +1,6 @@
 package com.aixel.recipeme.core;
 
+import com.aixel.recipeme.core.exceptions.ValidationException;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @NoArgsConstructor
@@ -20,8 +24,8 @@ public abstract class CrudController<E, ID> {
     }
 
     @PostMapping(value = {"/"})
-    public E insert(@RequestBody final E object) {
-        return crudService.insert(object);
+    public ResponseEntity<E> insert(@RequestBody final E object) {
+        return new ResponseEntity<>(crudService.insert(object), HttpStatus.OK);
     }
 
     @GetMapping(value = {"/{id}"})
@@ -45,5 +49,17 @@ public abstract class CrudController<E, ID> {
     @PutMapping(value = {"/{id}"})
     public ResponseEntity<E> put(@PathVariable final ID id, @RequestBody final E object) {
         return null;
+    }
+
+    // EXCEPTION HANDLING
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ValidationException.class)
+    public Map<String, String> handleGenericException(Exception ex) {
+        Map<String, String> err = new HashMap<>();
+        err.put("status", "KO");
+        err.put("message", ex.getMessage());
+        err.put("stack", Arrays.toString(ex.getStackTrace()));
+        return err;
     }
 }
